@@ -41,19 +41,18 @@ function renderPagination(totalItems) {
     }
 }
 
+// catch filter-button clicks even under Swup
 document.addEventListener('click', function(e) {
-    // catch clicks on any <a> under #filter-buttons
     const btn = e.target.closest('#filter-buttons a');
     if (!btn) return;
   
     e.preventDefault();
-    // reset active class on all buttons
+    // toggle active class
     document.querySelectorAll('#filter-buttons a')
       .forEach(b => b.classList.remove('mil-active'));
-    // mark this one active
     btn.classList.add('mil-active');
   
-    // filter posts
+    // run your filter
     filterPosts(btn.dataset.filter);
   });
 
