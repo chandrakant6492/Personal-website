@@ -41,14 +41,21 @@ function renderPagination(totalItems) {
     }
 }
 
-buttons.forEach(button => {
-    button.addEventListener('click', e => {
-        e.preventDefault();
-        buttons.forEach(b => b.classList.remove('mil-active'));
-        button.classList.add('mil-active');
-        filterPosts(button.dataset.filter);
-    });
-});
+document.addEventListener('click', function(e) {
+    // catch clicks on any <a> under #filter-buttons
+    const btn = e.target.closest('#filter-buttons a');
+    if (!btn) return;
+  
+    e.preventDefault();
+    // reset active class on all buttons
+    document.querySelectorAll('#filter-buttons a')
+      .forEach(b => b.classList.remove('mil-active'));
+    // mark this one active
+    btn.classList.add('mil-active');
+  
+    // filter posts
+    filterPosts(btn.dataset.filter);
+  });
 
 // Initialize
 renderPosts(); // This is just a sample script. Paste your real code (javascript or HTML) here.
