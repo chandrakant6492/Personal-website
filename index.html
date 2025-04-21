@@ -194,9 +194,46 @@
         </div>
         <!-- frame end -->
 
+        
         <!-- content -->
         <div class="mil-content">
             <div id="swupMain" class="mil-main-transition">
+
+
+                <!-- popup model: put this immediately after your preloader in the <body> -->
+                <div class="welcome-modal__overlay" style="display:none;"></div>
+                <div class="welcome-modal__body mil-soft-bg mil-p-120-90" data-ref="container" style="display:none;">
+                <button type="button" class="welcome-modal__close mil-link mil-dark" data-ref="close">×</button>
+
+                <div class="welcome-modal__intro">
+                    <div class="welcome-modal__intro__body">
+                    <!-- thick line above heading -->
+                    <h3>Welcome to chandrakant.science</h3>
+                    <div style="width: 6.2cm; height: 0.3cm; background: rgb(255,152,0); margin-top: 1rem;; margin-bottom: 1rem;"></div>
+                    <h5 style="margin-top: 2rem;">Latest news</h5>
+                    <p style="color:rgba(56,52,52,0.97);">
+                        Explore our state‑of‑the‑art deforestation attribution model, which integrates best‑available remote‑sensing datasets with agricultural statistics to deliver precise estimates of deforestation driven by agricultural and forestry commodities.
+                    </p>
+                    </div>
+                </div>
+
+                <div class="welcome-modal__publication">
+                    <!-- entire card is now a link -->
+                    <a href="DeDuCE.html" class="card">
+                    <div class="card__image">
+                        <img src="img/icons/deduce-1.png" alt="DeDuCE model">
+                    </div>
+                    <div class="card__body">
+                        <h3 class="card__title">Deforestation and Carbon Emission (DeDuCE) model</h3>
+                        <ul class="card__meta">
+                        <li class="card__meta__item">6 April 2025</li>
+                        </ul>
+                    </div>
+                    </a>
+                </div>
+                </div>
+
+
 
                 <!-- banner -->
                 <section class="mil-banner mil-dark-bg">
@@ -850,6 +887,8 @@
     <script src="js/main.js"></script>
     <!-- js -->
     <script src="js/external-click.js"></script>
+    <!-- js -->
+    <script src="js/popup.js"></script>
 </body>
 	
 </html>
