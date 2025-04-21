@@ -1,7 +1,15 @@
-// Check if this is the user's first visit after navigation
-if (!sessionStorage.getItem('hasRefreshed')) {
-  setTimeout(function() {
-    sessionStorage.setItem('hasRefreshed', 'true');
-    location.reload();
-  }, 1000); // 5000 ms = 5 seconds
-}
+(function() {
+  const target = "https://www.chandrakant.science/blogs.html";
+  // only run on the exact page
+  if (window.location.href === target) {
+    // only run once per session
+    if (!sessionStorage.getItem("blogsRefreshed")) {
+      sessionStorage.setItem("blogsRefreshed", "true");
+      window.addEventListener("load", () => {
+        setTimeout(() => {
+          window.location.reload();
+        }, 5000);
+      });
+    }
+  }
+})();
