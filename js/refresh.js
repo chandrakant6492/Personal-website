@@ -8,7 +8,7 @@
       window.addEventListener("load", () => {
         setTimeout(() => {
           window.location.reload();
-        }, 5000);
+        }, 0.0001);
       });
     }
   }
