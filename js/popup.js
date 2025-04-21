@@ -4,7 +4,7 @@
                         setTimeout(() => {
                             document.querySelector('.welcome-modal__overlay').style.display = 'block';
                             document.querySelector('.welcome-modal__body').style.display = 'block';
-                        }, 6000);
+                        }, 6500);
                         });
                   
                     // a single function to hide both overlay & modal
