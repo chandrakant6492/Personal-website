@@ -3,5 +3,5 @@ if (!sessionStorage.getItem('hasRefreshed')) {
   setTimeout(function() {
     sessionStorage.setItem('hasRefreshed', 'true');
     location.reload();
-  }, 5000); // 5000 ms = 5 seconds
+  }, 1000); // 5000 ms = 5 seconds
 }
