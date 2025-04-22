@@ -25,14 +25,14 @@ jobs:
         run: |
           API_KEY="3900f54f31f2a51e27c2e1c879256310791bd0f35e83c6d2edaaaa790b97522b"
           AUTHOR_ID="pUSXwTMAAAAJ"
-          URL="https://serpapi.com/search.json?$(jq -nr \
-            --arg k "$API_KEY" --arg a "$AUTHOR_ID" \
-            '{"engine":"google_scholar_author","api_key":$k,"author_id":$a,"hl":"en"} \
-             | to_entries | map("\(.key)=\(.value)") | join("&")')"
-          RAW=$(curl -s "https://api.allorigins.win/raw?url=$(jq -nr --arg url "$URL" '$url|@uri')")
+          URL="https://serpapi.com/search.json?engine=google_scholar_author&api_key=${API_KEY}&author_id=${AUTHOR_ID}&hl=en"
+
+          RAW=$(curl -s "https://api.allorigins.win/raw?url=$(python3 -c \"import urllib.parse; print(urllib.parse.quote('''$URL''', safe=''))\")")
+
 
           CITS=$(echo "$RAW" | jq -r '.cited_by.total // empty')
-          HIDX=$(echo "$RAW" | jq -r '.h_index      // empty')
++         HIDX=$(echo "$RAW" | jq -r '.h_index        // empty')
+
           TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 
           if [[ -z "$CITS" || -z "$HIDX" ]]; then
