@@ -1,9 +1,15 @@
-document.addEventListener('click', function(e) {
-    const btn = e.target.closest('#filter-buttons a');
-    if (!btn) return;
-    e.preventDefault();
-    document.querySelectorAll('#filter-buttons a')
-            .forEach(b => b.classList.remove('mil-active'));
-    btn.classList.add('mil-active');
-    filterPosts(btn.dataset.filter);
-  });
+(function() {
+        const target = "https://www.chandrakant.science/blogs.html";
+        // only run on the exact page
+        if (window.location.href === target) {
+          // only run once per session
+          if (!sessionStorage.getItem("blogsRefreshed")) {
+            sessionStorage.setItem("blogsRefreshed", "true");
+            window.addEventListener("load", () => {
+              setTimeout(() => {
+                window.location.reload();
+              }, 0.0001);
+            });
+          }
+        }
+      })();
