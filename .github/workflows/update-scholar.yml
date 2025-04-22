@@ -21,7 +21,7 @@ jobs:
       - name: Install jq
         run: sudo apt-get update && sudo apt-get install -y jq
 
-        - name: Fetch Scholar data
+      - name: Fetch Scholar data
         run: |
           API_KEY="3900f54f31f2a51e27c2e1c879256310791bd0f35e83c6d2edaaaa790b97522b"
           AUTHOR_ID="pUSXwTMAAAAJ"
