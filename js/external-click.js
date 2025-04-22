@@ -1,4 +1,3 @@
-<script>
 (function(){
   // only target your blogs page
   function onBlogs() {
@@ -31,4 +30,3 @@
   window.addEventListener('popstate', () => window.dispatchEvent(new Event('locationchange')));
   window.addEventListener('locationchange', tryReload);
 })();
-</script>
