@@ -1,7 +1,13 @@
 name: Fetch Google Scholar Metrics
 
-# 1) Schedule: run once every day at 00:05 UTC
 on:
+  # 1) Manual trigger from the Actions UI
+  workflow_dispatch:
+  # 2) Also run on every push to main (for testing)
+  push:
+    branches:
+      - main
+  # 3) Still run daily at 00:05 UTC
   schedule:
     - cron: '5 0 * * *'
 
@@ -10,37 +16,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # a) check out your code
       - uses: actions/checkout@v4
 
-      # b) fetch and parse scholar data
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
       - name: Fetch Scholar data
         run: |
           API_KEY="3900f54f31f2a51e27c2e1c879256310791bd0f35e83c6d2edaaaa790b97522b"
           AUTHOR_ID="pUSXwTMAAAAJ"
-
-          # build the SerpAPI URL
           URL="https://serpapi.com/search.json?$(jq -nr \
             --arg k "$API_KEY" --arg a "$AUTHOR_ID" \
             '{"engine":"google_scholar_author","api_key":$k,"author_id":$a,"hl":"en"} \
              | to_entries | map("\(.key)=\(.value)") | join("&")')"
-
-          # proxy through AllOrigins to avoid CORS if needed
           RAW=$(curl -s "https://api.allorigins.win/raw?url=$(jq -nr --arg url "$URL" '$url|@uri')")
 
-          # extract citations and h-index
           CITS=$(echo "$RAW" | jq -r '.cited_by.total // empty')
           HIDX=$(echo "$RAW" | jq -r '.h_index      // empty')
           TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 
-          # validate
           if [[ -z "$CITS" || -z "$HIDX" ]]; then
             echo "❌ Could not parse metrics. Response was:"
             echo "$RAW" | head -n20
             exit 1
           fi
 
-          # write out metrics.json
           cat > metrics.json <<EOF
           {
             "citations": $CITS,
@@ -49,7 +49,6 @@ jobs:
           }
           EOF
 
-      # c) commit + push only if changed
       - name: Commit & push metrics
         run: |
           git config user.name  "github-actions[bot]"
