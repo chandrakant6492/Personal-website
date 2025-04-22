@@ -30,8 +30,8 @@ jobs:
           RAW=$(curl -s "$URL")
 
 
-          CITS=$(echo "$RAW" | jq -r '.cited_by.table[0].citations.all // empty')
-          HIDX=$(echo "$RAW" | jq -r '.h_index.table[1].citations.all // empty')
+          CITS=$(echo "$RAW" | jq -r '.author.cited_by.table[0].citations.all // empty')
+          HIDX=$(echo "$RAW" | jq -r '.author.h_index.table[1].citations.all // empty')
 
           TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 
