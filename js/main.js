@@ -1060,6 +1060,13 @@ $(function () {
 
 });
 
+
+/************************ */
+
+//Google Scholar Citations
+
+/************************ */
+
 function updateScholarMetrics() {
     const citElem = document.getElementById("gs-citations");
     const hElem   = document.getElementById("gs-hindex");
