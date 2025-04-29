@@ -13,9 +13,10 @@ function filterPosts(filter) {
 }
 
 function renderPosts() {
-    const filtered = allPosts.filter(post =>
-        currentFilter === 'all' || post.dataset.tags.includes(currentFilter)
-    );
+    const filtered = allPosts.filter(post => {
+        const tags = post.dataset.tags.split(',').map(tag => tag.trim());
+        return currentFilter === 'all' || tags.includes(currentFilter);
+    });
 
     allPosts.forEach(post => post.style.display = 'none');
     filtered.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
