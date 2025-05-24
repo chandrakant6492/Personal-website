@@ -666,34 +666,6 @@
     </div>
     <!-- wrapper end -->
 
-    <!-- Filter script -->
-    <!-- Filter script: runs after the list and select exist -->
-    <script>
-    document.getElementById('yearFilter').addEventListener('change', function() {
-        const selected = this.value;           // e.g. "2025" or "2025 2024"
-        const selYears = selected === 'all'
-        ? []
-        : selected.split(' ').map(y => y.trim());
-
-        document.querySelectorAll('#pub-list li').forEach(li => {
-        // assume li.dataset.year is like "2025" or "2025 2024"
-        const liYears = li.dataset.year.split(' ').map(y => y.trim());
-        const match = (
-            selected === 'all' ||
-            selYears.some(y => liYears.includes(y))
-        );
-
-        if (match) {
-            li.style.display = '';
-            li.style.opacity = '1';
-        } else {
-            li.style.opacity = '0';
-            setTimeout(() => { li.style.display = 'none'; }, 200);
-        }
-        });
-    });
-    </script>
-
 
     <!-- jQuery js -->
     <script src="js/plugins/jquery.min.js"></script>
