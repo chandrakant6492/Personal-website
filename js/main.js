@@ -614,6 +614,46 @@ $(function () {
         
     
     
+
+    //
+    // Year-filter dropdown
+    //
+    function bindYearFilter() {
+        const $filter = $('#yearFilter');
+        const $items  = $('#pub-list li');
+
+        if (!$filter.length || !$items.length) return;
+
+        $filter.off('change').on('change', function() {
+        const sel = $(this).val().split(' ');
+        $items.each(function() {
+            const yrs = ($(this).data('year') || '').toString().split(' ').map(s=>s.trim());
+            const ok  = sel.includes('all') || sel.some(y=>yrs.includes(y));
+            $(this).css('display', ok ? '' : 'none');
+        });
+        });
+
+        // trigger once on bind
+        $filter.trigger('change');
+    }
+
+    // initial bind on DOM ready
+    bindYearFilter();
+
+
+    /***************************************************************************
+     * REINIT
+     ***************************************************************************/
+    document.addEventListener("swup:contentReplaced", function () {
+        // … all your existing re-init code …
+
+        // re-bind the filter after new content is loaded
+        bindYearFilter();
+    });
+
+
+
+
     /*----------------------------------------------------------
     ------------------------------------------------------------
 
