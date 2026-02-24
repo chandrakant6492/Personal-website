@@ -1120,23 +1120,22 @@ function updateScholarMetrics() {
       author_id: AUTHOR_ID,
       hl:        "en"
     }).toString();
-    const proxyUrl = "https://api.allorigins.win/get?url=" + encodeURIComponent(baseUrl);
-  
+    const proxyUrl =
+        "https://api.allorigins.win/get?url=" + encodeURIComponent(baseUrl);
+
     fetch(proxyUrl)
-      .then(r => {
-        if (!r.ok) throw new Error("Network response was not ok");
-        return r.json();
-      })
-      .then(data => {
-        const cit = data.cited_by.table[0].citations.all ?? "N/A";
-        const h   = data.cited_by.table[1].h_index.all   ?? "N/A";
-        citElem.textContent = cit;
-        hElem.textContent   = h;
-      })
-      .catch(err => {
-        console.error("Fetch error:", err);
-        citElem.textContent = "Error";
-        hElem.textContent   = "Error";
-      });
+        .then(r => r.json())
+        .then(({ contents }) => JSON.parse(contents))
+        .then(data => {
+            const cit = data?.cited_by?.table?.find(x => x.citations)?.citations?.all ?? "N/A";
+            const h   = data?.cited_by?.table?.find(x => x.h_index)?.h_index?.all ?? "N/A";
+            citElem.textContent = cit;
+            hElem.textContent   = h;
+        })
+        .catch(err => {
+            console.error(err);
+            citElem.textContent = "Error";
+            hElem.textContent   = "Error";
+        });
   }
 
