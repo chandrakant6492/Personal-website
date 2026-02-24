@@ -1120,7 +1120,7 @@ function updateScholarMetrics() {
       author_id: AUTHOR_ID,
       hl:        "en"
     }).toString();
-    const proxyUrl = "https://api.allorigins.win/raw?url=" + encodeURIComponent(baseUrl);
+    const proxyUrl = "https://api.allorigins.win/get?url=" + encodeURIComponent(baseUrl);
   
     fetch(proxyUrl)
       .then(r => {
