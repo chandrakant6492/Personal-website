@@ -1121,10 +1121,11 @@ function updateScholarMetrics() {
       hl:        "en"
     }).toString();
     const proxyUrl =
-        "https://corsproxy.io/?" + encodeURIComponent(baseUrl);
+        "https://api.allorigins.win/get?url=" + encodeURIComponent(baseUrl);
 
     fetch(proxyUrl)
         .then(r => r.json())
+        .then(({ contents }) => JSON.parse(contents))
         .then(data => {
             const cit = data?.cited_by?.table?.find(x => x.citations)?.citations?.all ?? "N/A";
             const h   = data?.cited_by?.table?.find(x => x.h_index)?.h_index?.all ?? "N/A";
