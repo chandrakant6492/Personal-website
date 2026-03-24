@@ -1111,24 +1111,11 @@ function updateScholarMetrics() {
     const citElem = document.getElementById("gs-citations");
     const hElem   = document.getElementById("gs-hindex");
     if (!citElem || !hElem) return;       // bail out if this page has no #gs-citations
-  
-    const API_KEY   = "3900f54f31f2a51e27c2e1c879256310791bd0f35e83c6d2edaaaa790b97522b";
-    const AUTHOR_ID = "pUSXwTMAAAAJ";
-    const baseUrl   = "https://serpapi.com/search.json?" + new URLSearchParams({
-      engine:    "google_scholar_author",
-      api_key:   API_KEY,
-      author_id: AUTHOR_ID,
-      hl:        "en"
-    }).toString();
-    const proxyUrl =
-        "https://api.allorigins.win/get?url=" + encodeURIComponent(baseUrl);
-
-    fetch(proxyUrl)
+    fetch("/data/scholar-metrics.json", { cache: "no-store" })
         .then(r => r.json())
-        .then(({ contents }) => JSON.parse(contents))
         .then(data => {
-            const cit = data?.cited_by?.table?.find(x => x.citations)?.citations?.all ?? "N/A";
-            const h   = data?.cited_by?.table?.find(x => x.h_index)?.h_index?.all ?? "N/A";
+            const cit = data?.citations ?? "N/A";
+            const h   = data?.h_index ?? "N/A";
             citElem.textContent = cit;
             hElem.textContent   = h;
         })
