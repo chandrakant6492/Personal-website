@@ -1,4 +1,4 @@
-const itemsPerPage = 10;
+const itemsPerPage = 9;
 let currentPage = 1;
 
 const allPosts = Array.from(document.querySelectorAll('.blog-item'));
