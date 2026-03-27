@@ -504,9 +504,19 @@ $(function () {
         speed: 800,
         effect: 'fade',
         parallax: true,
+        autoplay: {
+            delay: 5000,
+            disableOnInteraction: false,
+        },
         navigation: {
             nextEl: '.mil-revi-next',
             prevEl: '.mil-revi-prev',
+        },
+        on: {
+            reachEnd: function() {
+                var sw = this;
+                setTimeout(function() { sw.slideTo(0, 800); sw.autoplay.start(); }, 5000);
+            }
         },
     })
 
@@ -1001,9 +1011,19 @@ $(function () {
             speed: 800,
             effect: 'fade',
             parallax: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
             navigation: {
                 nextEl: '.mil-revi-next',
                 prevEl: '.mil-revi-prev',
+            },
+            on: {
+                reachEnd: function() {
+                    var sw = this;
+                    setTimeout(function() { sw.slideTo(0, 800); sw.autoplay.start(); }, 5000);
+                }
             },
         })
 
