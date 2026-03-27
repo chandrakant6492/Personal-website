@@ -2823,18 +2823,6 @@ revievs
 blog
 
 ------------------------------------------- */
-#blog > .container {
-  max-width: 1680px;
-}
-
-@media screen and (min-width: 1200px) {
-  #blog-posts > .blog-item {
-    -webkit-box-flex: 0;
-        -ms-flex: 0 0 33.333333%;
-            flex: 0 0 33.333333%;
-    max-width: 33.333333%;
-  }
-}
 
 .mil-blog-card {
   display: block;
